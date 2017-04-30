@@ -7,10 +7,10 @@ namespace SerialKeyManager.HelperMethods
     public class OneTimePassword
     {
         /// <summary>
-        /// 
+        /// Creates a time-based one-time password based on rfc6238.
         /// </summary>
-        /// <param name="secret"></param>
-        /// <returns></returns>
+        /// <param name="secret">The shared secret created using
+        /// <see cref="CreateSharedSecret"/>.</param>
         public static int TimeBasedPassword(byte[] secret)
         {
             // see https://tools.ietf.org/html/rfc6238
@@ -20,11 +20,11 @@ namespace SerialKeyManager.HelperMethods
 
 
         /// <summary>
-        /// 
+        ///  Creates a counter-based one-time password based on rfc4226.
         /// </summary>
-        /// <param name="secret"></param>
-        /// <param name="counter"></param>
-        /// <returns></returns>
+        /// <param name="secret">The shared secret created using
+        /// <see cref="CreateSharedSecret"/>.</param>
+        /// <param name="counter">The counter</param>
         public static int CounterBasedPassword(byte[] secret, long counter)
         {
             // see https://tools.ietf.org/html/rfc4226
@@ -49,6 +49,9 @@ namespace SerialKeyManager.HelperMethods
             return bin_code % 0xf4240;
         }
 
+        /// <summary>
+        /// Creates a random shared secret.
+        /// </summary>
         public static byte[] CreateSharedSecret()
         {
             // recommend length is 160 bits (120 bits is the minimum)
@@ -65,6 +68,12 @@ namespace SerialKeyManager.HelperMethods
             return buffer;
         }
 
+        /// <summary>
+        /// Converts the random shared secret from <see cref="CreateSharedSecret"/>
+        /// to base32.
+        /// </summary>
+        /// <param name="secret"></param>
+        /// <returns></returns>
         public static string SharedSecretToString(byte[] secret)
         {
             return Helpers.BytesToBase32(secret);
