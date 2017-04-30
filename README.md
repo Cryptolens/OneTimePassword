@@ -24,7 +24,7 @@ OneTimePassword.CounterBasedPassword(secret, 1)
 The counter here is 1.
 
 ### Google Authenticator App
-To get a a Google Authenticator friendly shared secret:
+To get a Google Authenticator friendly shared secret:
 ```
 OneTimePassword.SharedSecretToString(secret);
 ```
