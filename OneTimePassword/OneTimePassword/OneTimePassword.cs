@@ -7,15 +7,20 @@ namespace SerialKeyManager.HelperMethods
     public class OneTimePassword
     {
         /// <summary>
+        /// The period of time used for TOTP.
+        /// </summary>
+        public readonly static int PERIOD = 30;
+
+        /// <summary>
         /// Creates a time-based one-time password based on rfc6238.
         /// </summary>
         /// <param name="secret">The shared secret created using
         /// <see cref="CreateSharedSecret"/>.</param>
-        public static int TimeBasedPassword(byte[] secret)
+        public static string TimeBasedPassword(byte[] secret)
         {
             // see https://tools.ietf.org/html/rfc6238
 
-            return CounterBasedPassword(secret, DateTimeOffset.UtcNow.ToUnixTimeSeconds() / 30);
+            return CounterBasedPassword(secret, DateTimeOffset.UtcNow.ToUnixTimeSeconds() / PERIOD);
         }
 
 
@@ -25,7 +30,7 @@ namespace SerialKeyManager.HelperMethods
         /// <param name="secret">The shared secret created using
         /// <see cref="CreateSharedSecret"/>.</param>
         /// <param name="counter">The counter</param>
-        public static int CounterBasedPassword(byte[] secret, long counter)
+        public static string CounterBasedPassword(byte[] secret, long counter)
         {
             // see https://tools.ietf.org/html/rfc4226
 
@@ -46,7 +51,7 @@ namespace SerialKeyManager.HelperMethods
 
             // bincode % 10^6
 
-            return bin_code % 0xf4240;
+            return (bin_code % 0xf4240).ToString().PadLeft(6,'0');
         }
 
         /// <summary>

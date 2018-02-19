@@ -25,7 +25,7 @@ namespace UnitTestProject1
             var secret = OneTimePassword.CreateSharedSecret();
             Debug.WriteLine(OneTimePassword.SharedSecretToString(secret));
 
-            Debug.WriteLine(OneTimePassword.TimeBasedPassword(new byte[] { 123, 123 }));
+            Debug.WriteLine(OneTimePassword.TimeBasedPassword(secret));
         }
     }
 }
