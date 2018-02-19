@@ -29,33 +29,7 @@ To get a Google Authenticator friendly shared secret:
 OneTimePassword.SharedSecretToString(secret);
 ```
 
-## Referencing from .NET Framework
-This can be achieved by changing the the OneTimePassword.csproj file. Initially, it looks like
-```
-<Project Sdk="Microsoft.NET.Sdk">
+## Referencing from .NET Framework, .NET Core and others
+One Time Password targets the .NET Standard 1.6, which should be compatible with .NET Framework 4.6.1 and .NET Core 1.0. For other frameworks, please see [this](https://docs.microsoft.com/en-us/dotnet/standard/net-standard).
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <Authors>Artem Los</Authors>
-    <Company>Artem Los</Company>
-  </PropertyGroup>
-
-</Project>
-```
-
-In order to support .NET Framework, you can change `netcoreapp1.0` to `net46`.
-
-```
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <Authors>Artem Los</Authors>
-    <Company>Artem Los</Company>
-  </PropertyGroup>
-
-</Project>
-```
-It will display errors, but you will still find the compiled binaries in `Debug\net46`.
+It's seems to be important to install [NETStandard.Library](https://www.nuget.org/packages/NETStandard.Library/) for everything to work, especially on the .NET Framework.
