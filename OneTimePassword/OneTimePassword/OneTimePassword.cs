@@ -2,7 +2,7 @@
 
 using System.Security.Cryptography;
 
-namespace SerialKeyManager.HelperMethods
+namespace Cryptolens.OneTimePassword
 {
     public class OneTimePassword
     {
@@ -82,6 +82,18 @@ namespace SerialKeyManager.HelperMethods
         public static string SharedSecretToString(byte[] secret)
         {
             return Helpers.BytesToBase32(secret);
+        }
+
+        /// <summary>
+        /// Creates an url which can be used to create a QR-code that users can scan in their Authenticator app.
+        /// </summary>
+        /// <param name="secret">The shared secret obtained from <see cref="SharedSecretToString(byte[])"/>.</param>
+        /// <param name="username">The username that this two-factor code will be associated with. </param>
+        /// <param name="companyName">Company name and/or your app name.</param>
+        /// <returns></returns>
+        public static string GetAuthenticatorAppUrl(string secret, string username, string companyName)
+        {
+            return $"otpauth://totp/${username}?secret=${secret}&issuer=${companyName}";
         }
     }
 }

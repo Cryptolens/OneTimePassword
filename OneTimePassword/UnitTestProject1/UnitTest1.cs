@@ -2,7 +2,7 @@ using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System.Diagnostics;
-using SerialKeyManager.HelperMethods;
+using Cryptolens.OneTimePassword;
 
 namespace UnitTestProject1
 {
@@ -26,6 +26,8 @@ namespace UnitTestProject1
             Debug.WriteLine(OneTimePassword.SharedSecretToString(secret));
 
             Debug.WriteLine(OneTimePassword.TimeBasedPassword(secret));
+
+            Debug.WriteLine(OneTimePassword.GetAuthenticatorAppUrl(OneTimePassword.SharedSecretToString(secret), "artem", "Cryptolens Demo"));
         }
     }
 }

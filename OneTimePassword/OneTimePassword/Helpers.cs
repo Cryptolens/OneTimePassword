@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SerialKeyManager.HelperMethods
+namespace Cryptolens.OneTimePassword
 {
     sealed class Helpers
     {
